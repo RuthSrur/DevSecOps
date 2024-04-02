@@ -1,0 +1,19 @@
+# This will use GET by default
+curl http://127.0.0.1:5000/tasks
+
+
+# This will use GET to get a specific task
+curl http://127.0.0.1:5000/tasks/2
+
+
+# Add a new task:
+# (You have to specify Content-Type to send data as json)
+curl  -X POST 
+      -H "Content-Type: application/json" 
+      -d '{  "title": "buy", "details": "Milk"}' http://127.0.0.1:5000/tasks
+
+
+GET  (to read data)
+POST (to create a new one)
+PUT  (to update an existing one)
+DELETE (to delete an existing one)
