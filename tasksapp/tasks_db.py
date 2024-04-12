@@ -1,6 +1,14 @@
-import json
+import json, os
+from flask import jsonify
 
-tasks_file = "./tasks.json"
+tasks_file = "/home/ruth/DevSecOps/tasksapp/tasks.json"
+
+# def ensure_file_exists():
+#     if not os.path.exists(tasks_file):
+#      with open(tasks_file, 'w') as file:
+#         initial_data = {"id":1, "tasks":[]}
+#         json.dump(initial_data, file)
+# ensure_file_exists()
 
 def get_all_tasks():
     with open(tasks_file, 'r') as file:
@@ -20,8 +28,9 @@ def add_task(new_task):
     new_task["id"] = max([item['id'] for item in tasks]) + 1
     tasks.append(new_task)
     with open(tasks_file, 'w') as file:
-        json.dump(tasks, file)
+        json.dump(tasks, file, indent=4)
     return new_task
+
 
 def delete_task(task_id):
     tasks= get_all_tasks()
@@ -51,6 +60,7 @@ def get_tasks_db():
         initial_data = {"id":1, "tasks":[]}
         json.dump(initial_data, dbfile)
     return dbfile  
+
 
 
 
