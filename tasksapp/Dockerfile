@@ -5,7 +5,6 @@ FROM python:3.8-alpine
 COPY ./requirements.txt /app/requirements.txt
 COPY ./Tasks.py /app/Tasks.py
 COPY ./tasks_db.py /app/tasks_db.py
-COPY ./tasks.json /app/tasks.json
 
 
 # switch working directory
