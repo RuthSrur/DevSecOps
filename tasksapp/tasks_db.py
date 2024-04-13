@@ -1,13 +1,13 @@
 import json, os
 from flask import jsonify
 
-tasks_file = "/home/ruth/DevSecOps/tasksapp/tasks.json"
+tasks_file = "tasks.json"
 
 def ensure_file_exists():
     if not os.path.exists(tasks_file):
         with open(tasks_file, 'w') as file:
             json.dump([], file)  # Start with an empty list of tasks
-ensure_file_exists()
+
 
 def get_all_tasks():
     with open(tasks_file, 'r') as file:
@@ -50,14 +50,20 @@ def delete_task(task_id):
         return True
     return False
 
-def update_task(task_id,updated_task):
-    tasks= get_all_tasks()
+def update_task(task_id, updated_task):
+    tasks = get_all_tasks()
+    task_found = False
     for task in tasks:
         if task['id'] == task_id:
             task.update(updated_task)
-            with open(tasks_file, 'w') as file:
-                json.dump(tasks, file, indent=4)
-            return updated_task  
+            task_found = True
+    if task_found:
+        with open(tasks_file, 'w') as file:
+            json.dump(tasks, file, indent=4)
+        return True
+    return False
+
+
 
 def get_tasks_db():
     ensure_file_exists()  # Ensure file exists and is accessible
@@ -69,7 +75,7 @@ def get_tasks_db():
     return all_tasks
 
 
-
+ensure_file_exists() 
 
 
 
